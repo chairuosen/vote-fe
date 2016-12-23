@@ -45,7 +45,6 @@ module.exports = {
     devtool:"cheap-module-source-map",
     plugins:[
         new HtmlWebpackPlugin({
-            title:"Loading...",
             template: 'src/index.html'
         })
     ]
