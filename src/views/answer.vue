@@ -67,13 +67,30 @@
                     vm.errorMsg = e;
                 });
             },
+            verify:function () {
+
+                var flag = true;
+
+                this.questionGroups.forEach(function (group) {
+                    group.errorMsg = "";
+                    if(group.question.isRequired){
+                        if(!group.answer.value || !group.answer.value.length ){
+                            group.errorMsg = "此项必填";
+                            flag = false;
+                        }
+                    }
+                });
+                return flag;
+            },
             submit:function () {
                 var vm = this;
-                api.saveAnswer(vm.id,vm.group).then(function () {
-                    vm.isSuccess = true;
-                }).catch(function (e) {
-                    vm.errorMsg = e;
-                })
+                if( vm.verify() ) {
+                    api.saveAnswer(vm.id,vm.questionGroups).then(function () {
+                        vm.isSuccess = true;
+                    }).catch(function (e) {
+                        vm.errorMsg = e;
+                    });
+                }
             }
         },
         components: {

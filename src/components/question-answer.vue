@@ -1,4 +1,4 @@
-<style lang="less" rel="stylesheet/less">
+<style lang="less" rel="stylesheet/less" scoped>
     .answer-group{
         margin:20px 0;
         h2{
@@ -6,6 +6,9 @@
             font-size:20px;
             margin-bottom:10px;
         }
+    }
+    .group-error{
+        color:red;
     }
 </style>
 <template>
@@ -26,7 +29,9 @@
         <div v-if="group.question.withInput" style="margin-top:10px;">
             其他答案: <i-input :value.sync="group.answer.text"></i-input>
         </div>
-
+        <div class="group-error">
+            {{group.errorMsg}}
+        </div>
     </div>
 </template>
 <script>
@@ -46,6 +51,11 @@
             return {}
         },
         methods: {},
+        watch:{
+            'group.answer.value':function () {
+                this.group.errorMsg = "";
+            }
+        },
         components: {},
         ready: function () {
             console.log(util.clone(this.group));

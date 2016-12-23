@@ -43,6 +43,7 @@ module.exports = {
     },
     saveAnswer:function (questionId,object) {
         // todo
+        console.log(questionId,util.clone(object));
         return Promise.resolve();
     }
 }
