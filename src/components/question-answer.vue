@@ -13,7 +13,7 @@
 </style>
 <template>
     <div class="answer-group">
-        <h2>{{group.question.text}}</h2>
+        <h2>{{index+1}}. {{group.question.text}}</h2>
         <div v-if="group.question.selectType == 'single'">
             <Radio-group :model.sync="group.answer.value">
                 <Radio v-for="o in group.question.options" :value="o.id">{{o.text}}</Radio>
